@@ -1,7 +1,7 @@
 /**
  * mobile-ai plugin for OpenCode.
  *
- * Reads Copilot-native config (agents/*.agent.md, skills/*/SKILL.md) and
+ * Reads Copilot-native config (agents/*.agent.md, skills/SKILL.md) and
  * translates it into OpenCode agents, commands, and skills at runtime.
  *
  * Usage in opencode.json:
