@@ -1,0 +1,14 @@
+# Ignore everything
+*
+
+# Track OpenCode config
+!.gitignore
+!.opencode/
+!.opencode/**
+!opencode.json
+!AGENTS.md
+
+# Ignore generated stuff inside .opencode
+.opencode/node_modules/
+.opencode/package-lock.json
+.opencode/.DS_Store
