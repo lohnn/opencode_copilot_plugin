@@ -25,15 +25,22 @@ This is a multi-repo workspace. Each subdirectory is an independent git repo (or
 
 ## Plugin setup
 
-The workspace-level `opencode.json` registers the `mobile_ai` plugin and MCP servers. Individual projects inherit this configuration when opened from the workspace root.
+A local plugin (`.opencode/plugins/mobile-ai.js`) reads Copilot-native config from `mobile_ai/` and translates it into OpenCode agents, commands, and skills at runtime. No OpenCode-specific files are stored in `mobile_ai/`.
+
+The translation:
+- `mobile_ai/agents/*.agent.md` → OpenCode agents
+- `mobile_ai/skills/*/SKILL.md` → OpenCode slash commands + skills
+- `granular-permissions` in SKILL.md frontmatter → fine-grained OpenCode agent permissions
 
 ## Where things live
 
 | Concern | Location |
 |---------|----------|
-| Shared skills & agents | `mobile_ai/` |
+| Shared skills & agents (Copilot format) | `mobile_ai/agents/`, `mobile_ai/skills/` |
 | Conventions (work-item templates) | `mobile_ai/conventions/` |
-| Project-specific agents | `skandia_flutter/.opencode/agents/` |
+| OpenCode plugin (translator) | `.opencode/plugins/mobile-ai.js` |
+| OpenCode workspace config | `opencode.json` |
+| Project-specific agents | `.opencode/agents/` |
 | Project-specific doc indexes | `skandia_flutter/docs/indexes/` |
 | Analysis output (specs, drafts) | Written in the working project, never in `mobile_ai/` |
 | MCP server config | `opencode.json` (workspace root) |

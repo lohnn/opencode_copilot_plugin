@@ -1,6 +1,5 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": ["mobile-ai@file:///Users/lohnn/Programming/skandia/mobile_ai"],
   "mcp": {
     "azure-devops": {
       "type": "local",
