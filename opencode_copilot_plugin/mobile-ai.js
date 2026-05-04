@@ -1,14 +1,15 @@
 /**
  * mobile-ai plugin for OpenCode.
  *
- * Reads Copilot-native config and translates it into OpenCode agents,
- * commands, and skills at runtime.
+ * Reads Copilot-native config (agents/*.agent.md, skills/*/SKILL.md) and
+ * translates it into OpenCode agents, commands, and skills at runtime.
  *
- * Configure the source path via environment variable:
- *   MOBILE_AI_PATH=./mobile_ai  (relative to workspace root)
- *   MOBILE_AI_PATH=/absolute/path/to/mobile_ai
+ * Usage in opencode.json:
+ *   "plugin": [["./opencode_copilot_plugin/mobile-ai.js", { "path": "./mobile_ai" }]]
  *
- * Defaults to "./mobile_ai" relative to the workspace root.
+ * Options:
+ *   path - Path to the mobile_ai directory (relative to workspace root or absolute).
+ *          Defaults to "./mobile_ai".
  */
 
 import path from "path";
@@ -173,9 +174,12 @@ function readSkillForAgent(skillsDir, agentName, agentBody) {
   return null;
 }
 
-export const MobileAiPlugin = async ({ directory }) => {
-  // Resolve mobile_ai path: env var > default (./mobile_ai)
-  const mobileAiRelPath = process.env.MOBILE_AI_PATH || "mobile_ai";
+export const MobileAiPlugin = async function(ctx, options) {
+  const { directory } = ctx;
+
+  // Resolve mobile_ai path: plugin options > default (./mobile_ai)
+  const optPath = (options && typeof options === 'object') ? options.path : undefined;
+  const mobileAiRelPath = optPath || "mobile_ai";
   const mobileAiRoot = path.isAbsolute(mobileAiRelPath)
     ? mobileAiRelPath
     : path.resolve(directory, mobileAiRelPath);

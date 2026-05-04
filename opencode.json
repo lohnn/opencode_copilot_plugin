@@ -1,5 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "plugin": [["./opencode_copilot_plugin/mobile-ai.js", { "path": "./mobile_ai" }]],
   "mcp": {
     "azure-devops": {
       "type": "local",
